@@ -1,3 +1,5 @@
+
+
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
@@ -5,16 +7,57 @@
 #include <windows.h>
 #include <conio.h>
 
-//#define  KEY_DOWN(key) GetAsyncKeyState(key) == (SHORT)0x8001?1:0
+
+
 using namespace std;
 
-int map[37][73];
+int map[30][65];
 
-class Snake {
+class SnakeAttribute {
 public:
 	int Sx, Sy;
 	char body;
 };
+
+class Snake {
+public:
+	vector<SnakeAttribute> snake;
+	void Init() {
+		SnakeAttribute tmp[5];
+		tmp[0].Sx = 10 + 0;
+		tmp[0].Sy = 10 + 0;
+		tmp[0].body = '#';
+		for (int i = 1; i < 5; i++) {
+			tmp[i].Sx = 10 - i;
+			tmp[i].Sy = 10;
+			tmp[i].body = '*';
+		}
+		for (int j = 0; j < 5; j++) {
+			snake.push_back(tmp[j]);
+		}
+	}
+	void Forward(int x,int y) {
+		int t_x;
+		snake[0].Sx = 10 + x;
+		snake[0].Sy = 10 + y;
+		if (map[snake[0].Sy][snake[0].Sx] == 1) {
+			exit(1);
+		}
+		map[snake[0].Sy][snake[0].Sx] = 1;
+		for (t_x = 0; t_x < snake.size(); t_x++) {
+			map[snake[t_x].Sy][snake[t_x].Sx] = 1;
+			WriteChar(snake[t_x].Sx, snake[t_x].Sy, snake[t_x].body);
+		}
+		map[snake[snake.size() - 1].Sy][snake[snake.size() - 1].Sx] = 0;
+		WriteChar(snake[t_x - 1].Sx, snake[t_x - 1].Sy, ' ');
+		for (int j = snake.size() - 1; j > 0; j--) {
+			snake[j].Sx = snake[j - 1].Sx;
+			snake[j].Sy = snake[j - 1].Sy;
+		}
+	}
+
+};
+
 class Food {
 public:
 	int FoodX;
@@ -22,15 +65,10 @@ public:
 };
 
 void InitMap() {
-	for (int m = 0; m < 38; m++) {
-		for (int n = 0; n < 74; n++) {
-			if (m == 0 || n == 0 || m == 37 || n == 73) {
-				map[m][n] = 1;
-			}
-			else
-			{
-				map[m][n] = 0;
-			}
+	for (int m = 0; m < 31; m++) {
+		for (int n = 0; n < 66; n++) {
+			if (m == 0 || n == 0 || m == 30 || n == 65) map[m][n] = 1;
+			else map[m][n] = 0;
 		}
 	}
 }
@@ -45,7 +83,7 @@ void WriteChar(int x, int y, const char szStr, int color = 0)
 }
 
 int isEdge(int x, int y) {
-	if (x == 0 || x == 73 || y == 0 || y == 37) return 1;
+	if (map[y][x]  == 1) return 1;
 	return 0;
 }
 
@@ -59,7 +97,6 @@ void ShowCursor(bool isShow) {
 
 void FullScreen() {
 	HWND hwnd = GetForegroundWindow();
-
 	int x = GetSystemMetrics(SM_CXSCREEN) + 300;
 	int y = GetSystemMetrics(SM_CYSCREEN) + 300;
 	char setting[30];
@@ -68,7 +105,7 @@ void FullScreen() {
 }
 
 
-void InitSnake(vector<Snake> &v) {
+void InitSnake(vector<SnakeAttribute> &v) {
 	int x = 10, y = 10;
 	v[0].body = '#';
 	v[1].body = '*';
@@ -77,17 +114,17 @@ void InitSnake(vector<Snake> &v) {
 	v[4].body = '*';
 	v[0].Sx = 10;
 	v[0].Sy = 10;
-	for (int i = 1; i < 4; i++) {
+	for (int i = 0; i < 5; i++) {
 		v[i].Sy = y;
 		v[i].Sx = x - i;
 	}
-	for (int j = 4; j > 0; j--) {
-		v[j].Sx = v[j - 1].Sx;
-		v[j].Sy = v[j - 1].Sy;
-	}
+	// 	for (int j = 4; j > 0; j--) {
+	// 		v[j].Sx = v[j - 1].Sx;
+	// 		v[j].Sy = v[j - 1].Sy;
+	// 	}
 }
 
-void Forward(vector<Snake> &v, int x, int y) {
+void Forward(vector<SnakeAttribute> &v, int x, int y) {
 
 	int t_x;
 	v[0].Sx = 10 + x;
@@ -95,9 +132,12 @@ void Forward(vector<Snake> &v, int x, int y) {
 	if (isEdge(v[0].Sx, v[0].Sy)) {
 		exit(1);
 	}
+	map[v[0].Sy][v[0].Sx] = 1;
 	for (t_x = 0; t_x < v.size(); t_x++) {
+		map[v[t_x].Sy][v[t_x].Sx] = 1;
 		WriteChar(v[t_x].Sx, v[t_x].Sy, v[t_x].body);
 	}
+	map[v[v.size() - 1].Sy][v[v.size() - 1].Sx] = 0;
 	WriteChar(v[t_x - 1].Sx, v[t_x - 1].Sy, ' ');
 	for (int j = v.size() - 1; j > 0; j--) {
 		v[j].Sx = v[j - 1].Sx;
@@ -112,30 +152,22 @@ int GetOper() {
 	return 0;
 }
 
-void FoodPosition(Food &myFood,vector<Snake> &snake) {
-	int SnakePosition[37][73];
-	for (int i = 0; i < 37; i++) {
-		memset(SnakePosition[i], 0, 73 * sizeof(int));
-	}
-	vector<Snake>::iterator iter = snake.begin();
-	for (; iter != snake.end(); iter++) {
-		SnakePosition[iter->Sy][iter->Sx] = 1;
-	}
+void FoodPosition(Food &myFood) {
 	srand((unsigned)time(NULL));
-	myFood.FoodX = rand() % 72+1;
-	myFood.FoodY = rand() % 36+1;
-	while (SnakePosition[myFood.FoodY][myFood.FoodX] == 1 ){
+	myFood.FoodX = rand() % 72 + 1;
+	myFood.FoodY = rand() % 36 + 1;
+	while (map[myFood.FoodY][myFood.FoodX] == 1) {
 		srand((unsigned)time(NULL));
-		myFood.FoodX = rand() % 72 + 1;
-		myFood.FoodY = rand() % 36 + 1;
+		myFood.FoodX = rand() % 64 + 1;
+		myFood.FoodY = rand() % 29 + 1;
 	}
-  	WriteChar(myFood.FoodX, myFood.FoodY, '*');
+	WriteChar(myFood.FoodX, myFood.FoodY, '*');
 }
 
-int Eat(vector<Snake> &snake, Food &myFood) {
-	
+int Eat(vector<SnakeAttribute> &snake, Food &myFood) {
+
 	if (snake[0].Sx == myFood.FoodX && snake[0].Sy == myFood.FoodY) {
-		Snake newsnake;
+		SnakeAttribute newsnake;
 		newsnake.Sx = myFood.FoodX;
 		newsnake.Sy = myFood.FoodY;
 		newsnake.body = '*';
@@ -146,17 +178,16 @@ int Eat(vector<Snake> &snake, Food &myFood) {
 }
 
 void SnakeMap() {
-
 	int i = 0;
 	InitMap();
-	for (int m = 0; m < 38; m++) {
-		for (int n = 0; n < 74; n++) {
+	for (int m = 0; m < 31; m++) {
+		for (int n = 0; n < 66; n++) {
 			if (map[m][n] == 1) {
 				WriteChar(n, m, '*');
 			}
 		}
 	}
-
+}
 
 // 	while (i < 73) {
 // 		WriteChar(i, 0, '*');
@@ -170,12 +201,11 @@ void SnakeMap() {
 // 
 // 		i++;
 // 	}
-}
+
 
 int main() {
 	int x = 0, y = 0;
-	Snake tmpSnake;
-	vector<Snake> snake(5);
+	vector<SnakeAttribute> snake(5);
 	Food snakefood;
 	FullScreen();
 	SnakeMap();
@@ -184,10 +214,10 @@ int main() {
 	int direction = 1;
 	int n_time = 200;
 	bool flat = false;
-	FoodPosition(snakefood,snake);
+	FoodPosition(snakefood);
 	while (TRUE) {
 		if (Eat(snake, snakefood)) {
-			FoodPosition(snakefood,snake);
+			FoodPosition(snakefood);
 		}
 		Sleep(n_time);
 		if (GetKeyState(VK_SPACE) < 0) {
