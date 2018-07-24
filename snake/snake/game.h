@@ -1,2 +1,2 @@
-void start();
-void EditMap();
+void TraditionStart();
+void FunnyStart();

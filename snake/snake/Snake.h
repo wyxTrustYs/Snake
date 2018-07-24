@@ -10,9 +10,10 @@ public:
 
 class Snake {
 public:
-	int score = 0;
+	int score;
+	string name;
 	vector<SnakeAttribute> snake;
-	void Init();
+	void Init(string name);
 	void Forward(int x, int y);
 	int Eat(Food &myFood);
 };

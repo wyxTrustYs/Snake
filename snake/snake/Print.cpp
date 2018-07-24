@@ -21,7 +21,14 @@ void WriteChar(int x, int y, const char szStr[], int color) {
 		puts(szStr);
 	}
 }
-
+void WriteChar(int x, int y, const char szStr[]) {
+	{
+		HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+		COORD pos = { x*2 , y };
+		SetConsoleCursorPosition(hOut, pos);
+		cout << szStr;
+	}
+}
 
 void ShowCursor(bool isShow) {
 	HANDLE hOutStd = GetStdHandle(STD_OUTPUT_HANDLE);

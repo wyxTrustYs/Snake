@@ -6,4 +6,5 @@ class Food {
 public:
 	COORD FoodPos;
 	void FoodPosition();
+	void FoodPositionMove();
 };

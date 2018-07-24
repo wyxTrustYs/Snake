@@ -6,11 +6,12 @@
 #include <vector>
 using namespace std;
 
-void OutputPos(int nx, int ny);
+void OutputPos(int nx, int ny,int flat = 1);
 void KeyEventProc(KEY_EVENT_RECORD ker);
 void MouseEventProc(MOUSE_EVENT_RECORD mer);
 int MessageLoop();
 void WriteChar(int x, int y, const char szStr, int color = 0);
+
 int main() {
 	MessageLoop();
 	getchar();
