@@ -148,6 +148,7 @@
     <ClCompile Include="map.cpp" />
     <ClCompile Include="MyMessage.cpp" />
     <ClCompile Include="Print.cpp" />
+    <ClCompile Include="SaveAndRead.cpp" />
     <ClCompile Include="Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="map.h" />
     <ClInclude Include="MyMessage.h" />
     <ClInclude Include="Print.h" />
+    <ClInclude Include="SaveAndRead.h" />
     <ClInclude Include="Snake.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

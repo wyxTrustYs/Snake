@@ -26,8 +26,8 @@ void Snake::Init(string name) {
 
 void Snake::Forward(int x, int y) {
 	int t_x;
-	snake[0].Sx = 63 + x;
-	snake[0].Sy = 10 + y;
+	snake[0].Sx += x;
+	snake[0].Sy += y;
 	if (map[snake[0].Sy][snake[0].Sx] == 1) {
 		exit(1);
 	}

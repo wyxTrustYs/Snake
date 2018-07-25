@@ -1,22 +1,24 @@
 #include "game.h"
-#include <iostream>
-#include <conio.h>
 #include "Food.h"
 #include "map.h"
 #include "Print.h"
-#include "Snake.h"
+#include "SaveAndRead.h"
 
+#include <iostream>
+#include <conio.h>
 using namespace std;
 
-void FunnyStart() {
-	Snake snake;
+
+void FunnyStart(char mapname[], Snake &GSnake) {
+	Snake tmpSnake;
+	tmpSnake = GSnake;
 	int x = 0, y = 0;
 
 	Food snakefood;
 	// 	FullScreen();
 	// 	InitMap();
 	ShowCursor(false);
-	snake.Init("player1");
+// 	tmpSnake.Init("player1");
 	int direction = 1;
 	int n_time = 200;
 	int flat = 0;
@@ -26,7 +28,7 @@ void FunnyStart() {
 		// 		if (snake.Eat(snakefood)) {
 		// 			snakefood.FoodPosition();
 		// 		}
-		if (snake.Eat(snakefood)) {
+		if (tmpSnake.Eat(snakefood)) {
 			snakefood.FoodPosition();
 		}
 
@@ -71,10 +73,23 @@ void FunnyStart() {
 			}
 			break;
 		case 'p':
-			WriteChar(34, 34, "ÓÎÏ·ÔÝÍ£", 0);
+		{
+			int save = 0;
+			char SnakeName[20];
+			WriteChar(34, 34, "ÓÎÏ·ÔÝÍ£(°´pÓÎÏ·¼ÌÐø)", 0);
+			WriteChar(24, 36, "1¡¢ÍË³öÓÎÏ·", 0);
+			WriteChar(34, 36, "2¡¢´æµµ²¢ÍË³ö", 0);
+			cin >> save;
+			if (save == 2) {
+				WriteChar(35, 34, "ÇëÊäÈë´æµµÃû£º", 0);
+				cin >> SnakeName;
+				Save(SnakeName, tmpSnake, mapname, '2');
+				return;
+			}
 			getch();
 			WriteChar(34, 34, "        ", 0);
 			break;
+		}
 		default:
 			break;
 		}
@@ -82,45 +97,48 @@ void FunnyStart() {
 		switch (direction)
 		{
 		case 0:
-			y--;
-			snake.Forward(x, y);
+			y = -1;
+			x = 0;
+			tmpSnake.Forward(x, y);
 			break;
 		case 1:
-			y++;
-			snake.Forward(x, y);
+			y = 1;
+			x = 0;
+			tmpSnake.Forward(x, y);
 			break;
 		case 2:
-			x--;
-			snake.Forward(x, y);
+			x = -1;
+			y = 0;
+			tmpSnake.Forward(x, y);
 			break;
 		case 3:
-			x++;
-			snake.Forward(x, y);
+			x = 1;
+			y = 0;
+			tmpSnake.Forward(x, y);
 			break;
 		default:
 			break;
 		}
 	}
+	
 }
 
-void TraditionStart() {
-	Snake snake;
+void TraditionStart(char mapname[], Snake &GSnake) {
+	Snake tmpSnake;
+	tmpSnake = GSnake;
 	int x = 0, y = 0;
 
 	Food snakefood;
 	// 	FullScreen();
 	// 	InitMap();
 	ShowCursor(false);
-	snake.Init("player1");
+	/*GSnake.Init("player1");*/
 	int direction = 1;
 	int n_time = 200;
 	int ForwardDir = 0;
 	snakefood.FoodPosition();
 	while (TRUE) {
-		if (snake.Eat(snakefood)) {
-			snakefood.FoodPosition();
-		}
-		if (snake.Eat(snakefood)) {
+		if (GSnake.Eat(snakefood)) {
 			snakefood.FoodPosition();
 		}
 
@@ -156,10 +174,22 @@ void TraditionStart() {
 			}
 			break;
 		case 'p':
-			WriteChar(34, 34, "ÓÎÏ·ÔÝÍ£", 0);
-			getch();
+		{
+			int save = 0;
+			char SnakeName[20];
+			WriteChar(34, 34, "ÓÎÏ·ÔÝÍ£(°´pÓÎÏ·¼ÌÐø)", 0);
+			WriteChar(24, 36, "1¡¢ÍË³öÓÎÏ·", 0);
+			WriteChar(34, 36, "2¡¢´æµµ²¢ÍË³ö", 0);
+			cin >> save;
+			if (save == 2) {
+				WriteChar(34, 34, "ÇëÊäÈë´æµµÃû£º", 0);
+				cin >> SnakeName;
+				Save(SnakeName, GSnake, mapname, '1');
+				return;
+			}
 			WriteChar(34, 34, "        ", 0);
 			break;
+		}
 		default:
 			break;
 		}
@@ -167,22 +197,23 @@ void TraditionStart() {
 		{
 		case 0:
 			y--;
-			snake.Forward(x, y);
+			GSnake.Forward(x, y);
 			break;
 		case 1:
 			y++;
-			snake.Forward(x, y);
+			GSnake.Forward(x, y);
 			break;
 		case 2:
 			x--;
-			snake.Forward(x, y);
+			GSnake.Forward(x, y);
 			break;
 		case 3:
 			x++;
-			snake.Forward(x, y);
+			GSnake.Forward(x, y);
 			break;
 		default:
 			break;
 		}
 	}
+	
 }

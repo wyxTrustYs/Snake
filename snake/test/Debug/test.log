@@ -1,6 +1,8 @@
 ﻿  main.cpp
-e:\snake\snake\test\main.cpp(24): warning C4838: 从“int”转换到“SHORT”需要收缩转换
-e:\snake\snake\test\main.cpp(31): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+e:\snake\snake\test\main.cpp(25): warning C4838: 从“int”转换到“SHORT”需要收缩转换
+e:\snake\snake\test\main.cpp(32): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 参见“sprintf”的声明
-  test.vcxproj -> E:\Snake\snake\Debug\test.exe
-  test.vcxproj -> E:\Snake\snake\Debug\test.pdb (Full PDB)
+e:\snake\snake\test\main.cpp(61): error C2668: “OutputPos”: 对重载函数的调用不明确
+  e:\snake\snake\test\main.cpp(30): note: 可能是“void OutputPos(int,int)”
+  e:\snake\snake\test\main.cpp(9): note: 或  “void OutputPos(int,int,int)”
+  e:\snake\snake\test\main.cpp(61): note: 尝试匹配参数列表“(SHORT, SHORT)”时
