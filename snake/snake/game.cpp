@@ -22,6 +22,8 @@ void FunnyStart(char mapname[], Snake &GSnake) {
 	int direction = 1;
 	int n_time = 200;
 	int flat = 0;
+	int snakescore;
+	int FoodSpeed = 10;
 	int ForwardDir = 0;
 	snakefood.FoodPosition();
 	while (TRUE) {
@@ -30,9 +32,13 @@ void FunnyStart(char mapname[], Snake &GSnake) {
 		// 		}
 		if (tmpSnake.Eat(snakefood)) {
 			snakefood.FoodPosition();
+			snakescore = tmpSnake.score;
+			if (snakescore % 5 == 0 && FoodSpeed >= 0) {
+				FoodSpeed = FoodSpeed - 2;
+			}
 		}
 
-		if (flat == 5) {
+		if (flat >= FoodSpeed) {
 			snakefood.FoodPositionMove();
 			flat = 0;
 		}
@@ -138,7 +144,7 @@ void TraditionStart(char mapname[], Snake &GSnake) {
 	int ForwardDir = 0;
 	snakefood.FoodPosition();
 	while (TRUE) {
-		if (GSnake.Eat(snakefood)) {
+		if (tmpSnake.Eat(snakefood)) {
 			snakefood.FoodPosition();
 		}
 
@@ -184,7 +190,7 @@ void TraditionStart(char mapname[], Snake &GSnake) {
 			if (save == 2) {
 				WriteChar(34, 34, "ÇëÊäÈë´æµµÃû£º", 0);
 				cin >> SnakeName;
-				Save(SnakeName, GSnake, mapname, '1');
+				Save(SnakeName, tmpSnake, mapname, '1');
 				return;
 			}
 			WriteChar(34, 34, "        ", 0);
@@ -196,20 +202,24 @@ void TraditionStart(char mapname[], Snake &GSnake) {
 		switch (direction)
 		{
 		case 0:
-			y--;
-			GSnake.Forward(x, y);
+			y = -1;
+			x = 0;
+			tmpSnake.Forward(x, y);
 			break;
 		case 1:
-			y++;
-			GSnake.Forward(x, y);
+			y = 1;
+			x = 0;
+			tmpSnake.Forward(x, y);
 			break;
 		case 2:
-			x--;
-			GSnake.Forward(x, y);
+			x = -1;
+			y = 0;
+			tmpSnake.Forward(x, y);
 			break;
 		case 3:
-			x++;
-			GSnake.Forward(x, y);
+			x = 1;
+			y = 0;
+			tmpSnake.Forward(x, y);
 			break;
 		default:
 			break;

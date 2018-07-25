@@ -1,12 +1,5 @@
 ﻿  game.cpp
-e:\snake\snake\snake\game.cpp(89): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+e:\snake\snake\snake\game.cpp(95): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\conio.h(452): note: 参见“getch”的声明
-  Snake.cpp
-e:\snake\snake\snake\snake.cpp(11): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 参见“strcpy”的声明
-e:\snake\snake\snake\snake.cpp(35): warning C4018: “<”: 有符号/无符号不匹配
-e:\snake\snake\snake\snake.cpp(52): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 参见“sprintf”的声明
-  正在生成代码...
   snake.vcxproj -> E:\Snake\snake\Debug\snake.exe
   snake.vcxproj -> E:\Snake\snake\Debug\snake.pdb (Full PDB)
