@@ -143,9 +143,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Food.cpp" />
-    <ClCompile Include="game.cpp" />
+    <ClCompile Include="MyGame.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="map.cpp" />
+    <ClCompile Include="MyMap.cpp" />
     <ClCompile Include="MyMessage.cpp" />
     <ClCompile Include="Print.cpp" />
     <ClCompile Include="SaveAndRead.cpp" />
@@ -153,8 +153,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Food.h" />
-    <ClInclude Include="game.h" />
-    <ClInclude Include="map.h" />
+    <ClInclude Include="MyGame.h" />
+    <ClInclude Include="MyMap.h" />
     <ClInclude Include="MyMessage.h" />
     <ClInclude Include="Print.h" />
     <ClInclude Include="SaveAndRead.h" />

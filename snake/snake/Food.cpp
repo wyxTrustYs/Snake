@@ -1,5 +1,5 @@
 #include "Food.h"
-#include "map.h"
+#include "MyMap.h"
 #include "Print.h"
 
 #include <iostream>

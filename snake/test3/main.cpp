@@ -4,7 +4,6 @@
 using namespace std;
 
 int main() {
-	system("dir .\\Debug");
-
+	printf("%d ", '0');
 	return 0;
 }

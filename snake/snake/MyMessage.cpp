@@ -1,4 +1,4 @@
-#include "map.h"
+#include "MyMap.h"
 #include <windows.h>
 #include "Print.h"
 

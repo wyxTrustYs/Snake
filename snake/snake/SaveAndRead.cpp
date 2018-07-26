@@ -1,15 +1,16 @@
-#include "map.h"
+#include "MyMap.h"
 #include "Snake.h"
 #include "SaveAndRead.h"
-#include "game.h"
+#include "MyGame.h"
 #include <iostream>
 #include <stdlib.h>
 using namespace std;
 
-void Save(char name[],Snake &snake,char mapname[],char level) {
+void Save(char name[],Snake &snake,char mapname[],char model,char level,char direction) {
 	FILE *file = NULL;
 	char SnakeFilePath[20] = "./data/";
 	char OtherFilePath[20] = "./data/";
+	
 	strcat(SnakeFilePath, name);
 	strcat(SnakeFilePath, ".data");
 	strcat(OtherFilePath, name);
@@ -28,8 +29,11 @@ void Save(char name[],Snake &snake,char mapname[],char level) {
 		cout << "open file fail" << endl;
 		exit(0);
 	}
+	
 	fputs(mapname, file);
-	fputc(level, file);
+	fputc(model, file);
+	fputc(level,file);
+	fputc(direction, file);
 	fclose(file);
 }
 
@@ -39,7 +43,6 @@ char* ReadingSave(char name[],Snake &snake) {
 	char OtherFilePath[20] = "./data/";
 	char dataname[20];
 	
-	char level;
 	memset(dataname, 0, 20 * sizeof(char));
 	snake.snake.clear();
 	snake.score = 0;

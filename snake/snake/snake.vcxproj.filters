@@ -21,16 +21,10 @@
     <ClCompile Include="Snake.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="map.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Print.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Food.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="game.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="MyMessage.cpp">
@@ -39,12 +33,15 @@
     <ClCompile Include="SaveAndRead.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="MyGame.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MyMap.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Snake.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="map.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Print.h">
@@ -53,13 +50,16 @@
     <ClInclude Include="Food.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="game.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="MyMessage.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SaveAndRead.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyGame.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MyMap.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

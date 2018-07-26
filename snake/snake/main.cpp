@@ -1,6 +1,6 @@
 #include <iostream>
-#include "game.h"
-#include "map.h"
+#include "MyGame.h"
+#include "MyMap.h"
 #include "Print.h"
 #include "Snake.h"
 #include "SaveAndRead.h"
@@ -10,6 +10,7 @@ int main() {
 	int option;
 	char name[10];
 	int num;
+	int flat;
 	Snake snake;
 	FullScreen();
 	while (true) {
@@ -30,21 +31,22 @@ int main() {
 			WriteChar(28, 10, "2、趣味玩法\n");
 
 			cin >> num;
-			FileToMap("init.map");
+			flat = SetSpeed();
+			if (flat == 4) break;
+			FileToMap("init");
 			LoadMap();
 			snake.Init("player1");
 			switch (num)
 			{
 			case 1:
-				TraditionStart("init.map",snake);
+				TraditionStart("init",snake);
 				break;
 			case 2:
-				FunnyStart("init.map",snake);
+				FunnyStart("init",snake);
 				break;
 			default:
 				break;
 			}
-
 			break;
 		case 2:
 			//			cout << "1、修改地图\n2、新建地图\n" << endl;
@@ -76,8 +78,8 @@ int main() {
 
 			break;
 		case 3:
+		{
 			system("cls");
-
 			system("dir .\\map");
 			cout << "请选择你要打开的地图" << endl;
 			cin >> name;
@@ -85,39 +87,48 @@ int main() {
 			WriteChar(20, 10, "1、传统玩法");
 			WriteChar(28, 10, "2、趣味玩法\n");
 			cin >> num;
+			char setlevel = SetSpeed();
 			FileToMap(name);
 			LoadMap();
 			snake.Init("player1");
 			switch (num)
 			{
 			case 1:
-				TraditionStart(name,snake);
+				TraditionStart(name, snake);
 				break;
 			case 2:
-				FunnyStart(name,snake);
+				FunnyStart(name, snake);
 				break;
 			default:
 				break;
 			}
 			break;
+		}
 		case 4:
 		{
+			char model;
 			char level;
+			char direction;
 			char *tmpname = NULL;
 			system("cls");
 			system("dir .\\data");
 			cin >> name;
 			snake.snake.clear();
 			tmpname = ReadingSave(name, snake);
+			direction = tmpname[strlen(tmpname) - 1];
+			tmpname[strlen(tmpname) - 1] = '\0';
 			level = tmpname[strlen(tmpname) - 1];
 			tmpname[strlen(tmpname) - 1] = '\0';
+			model = tmpname[strlen(tmpname) - 1];
+			tmpname[strlen(tmpname) - 1] = '\0';
 			strcpy(name, tmpname);
-
+			SetDirection(direction);
+			SetSpeed(level);
 			system("cls");
 			FileToMap(name);
 			LoadMap();
 			//			SetSnake(snake);
-			switch (level)
+			switch (model)
 			{
 			case '1':
 				TraditionStart(name, snake);
@@ -130,7 +141,6 @@ int main() {
 			}
 			break;
 		}
-			
 		default:
 			break;
 		}
