@@ -27,14 +27,12 @@ void FunnyStart(char mapname[], Snake &GSnake) {
 	int ForwardDir = 0;
 	snakefood.FoodPosition();
 	while (TRUE) {
-		// 		if (snake.Eat(snakefood)) {
-		// 			snakefood.FoodPosition();
-		// 		}
+		
 		if (tmpSnake.Eat(snakefood)) {
 			snakefood.FoodPosition();
 			snakescore = tmpSnake.score;
 			if (snakescore % 5 == 0 && FoodSpeed >= 0) {
-				FoodSpeed = FoodSpeed - 2;
+				FoodSpeed = FoodSpeed / 2;
 			}
 		}
 
@@ -82,16 +80,22 @@ void FunnyStart(char mapname[], Snake &GSnake) {
 		{
 			int save = 0;
 			char SnakeName[20];
-			WriteChar(34, 34, "游戏暂停(按p游戏继续)", 0);
+			HANDLE houtstd = GetStdHandle(STD_OUTPUT_HANDLE);
+			WriteChar(27, 34, "游戏暂停(按p游戏继续)", 0);
 			WriteChar(24, 36, "1、退出游戏", 0);
 			WriteChar(34, 36, "2、存档并退出", 0);
+			SetConsoleCursorPosition(houtstd, { 48,37 });
 			cin >> save;
 			if (save == 2) {
-				WriteChar(35, 34, "请输入存档名：", 0);
+				WriteChar(27, 34, "请输入存档名：       ", 0);
+				WriteChar(24, 36, "          ", 0);
+				WriteChar(34, 36, "             ", 0);
+				SetConsoleCursorPosition(houtstd, { 70,34 });
 				cin >> SnakeName;
 				Save(SnakeName, tmpSnake, mapname, '2');
 				return;
 			}
+			else if (save == 1) return;
 			getch();
 			WriteChar(34, 34, "        ", 0);
 			break;
@@ -183,12 +187,17 @@ void TraditionStart(char mapname[], Snake &GSnake) {
 		{
 			int save = 0;
 			char SnakeName[20];
-			WriteChar(34, 34, "游戏暂停(按p游戏继续)", 0);
+			HANDLE houtstd = GetStdHandle(STD_OUTPUT_HANDLE);
+			WriteChar(27, 34, "游戏暂停(按p游戏继续)", 0);
 			WriteChar(24, 36, "1、退出游戏", 0);
 			WriteChar(34, 36, "2、存档并退出", 0);
+			SetConsoleCursorPosition(houtstd, { 48,37 });
 			cin >> save;
 			if (save == 2) {
-				WriteChar(34, 34, "请输入存档名：", 0);
+				WriteChar(27, 34, "请输入存档名：       ", 0);
+				WriteChar(24, 36, "          ", 0);
+				WriteChar(34, 36, "             ", 0);
+				SetConsoleCursorPosition(houtstd, { 70,34 });
 				cin >> SnakeName;
 				Save(SnakeName, tmpSnake, mapname, '1');
 				return;

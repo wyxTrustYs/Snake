@@ -14,7 +14,7 @@ int main() {
 	FullScreen();
 	while (true) {
 		system("cls");
-		WriteChar(30, 5, "贪吃蛇游戏");
+		WriteChar(35, 5, "贪吃蛇游戏");
 		WriteChar(20, 10, "1、开始游戏");
 		WriteChar(30, 10, "2、编辑地图");
 		WriteChar(40, 10, "3、载入地图");

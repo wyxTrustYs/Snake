@@ -12,13 +12,21 @@ void InitMap() {
 		for (int n = 0; n < 65; n++) {
 			if (m == 0 || n == 0 || m == 29 || n == 64) {
 				map[m][n] = 1;
-				WriteChar(n, m, "¨€",0);
+				WriteChar(n, m, "¨€", 0);
 			}
 			else map[m][n] = 0;
 		}
 	}
-	WriteChar(0, 32, "play:",0);
-	WriteChar(30, 32, "score:",0);
+	WriteChar(0, 32, "play:", 0);
+	WriteChar(30, 32, "score:", 0);
+	WriteChar(67, 10, "¼üÎ»¿ØÖÆ£º", 0);
+	WriteChar(67, 11, "w:ÉÏÒÆ", 0);
+	WriteChar(67, 12, "s:ÏÂÒÆ", 0);
+	WriteChar(67, 13, "a:×óÒÆ", 0);
+	WriteChar(67, 14, "d:ÓÒÒÆ", 0);
+	WriteChar(67, 15, "space:¼ÓËÙ", 0);
+	WriteChar(67, 20, "p¼üÔÝÍ£", 0);
+
 }
 
 void MapToFile(char name[]) {
@@ -77,21 +85,7 @@ void MapDIY() {
 				break;
 			}
 
-			/*flat = getch();*/
-// 			switch (flat)
-// 			{
-// 			case 49:
-// 			{
-// 				system("cls"); 
-// 				InitMap(); 
-// 				WriteChar(66, 15, "1¡¢Çå³ýµØÍ¼", 0);
-// 				WriteChar(66, 16, "2¡¢±£´æµØÍ¼", 0);
-// 				break;
-// 			}
-// 			case 50:break;
-// 			default:
-//				break;
-// 			}
+		
 		}
 		if (stcRecode.EventType == MOUSE_EVENT) {
 			MouseEventProc(stcRecode.Event.MouseEvent);
@@ -110,6 +104,13 @@ void LoadMap() {
 	}
 	WriteChar(0, 32, "play:", 0);
 	WriteChar(30, 32, "score:", 0);
+	WriteChar(67, 10, "¼üÎ»¿ØÖÆ£º", 0);
+	WriteChar(67, 11, "w:ÉÏÒÆ", 0);
+	WriteChar(67, 12, "s:ÏÂÒÆ", 0);
+	WriteChar(67, 13, "a:×óÒÆ", 0);
+	WriteChar(67, 14, "d:ÓÒÒÆ", 0);
+	WriteChar(67, 15, "space:¼ÓËÙ", 0);
+	WriteChar(67, 20, "p¼üÔÝÍ£", 0);
 }
 
 void EditMap() {
